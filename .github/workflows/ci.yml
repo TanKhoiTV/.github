@@ -1,0 +1,23 @@
+# The shared workflow that this account's generated repositories call.
+#
+# The template's `ci` module makes a repository's own ci.yml a thin caller of this file,
+# pinned to a commit SHA (never a tag). Keeping the checks here means one edit reaches every
+# repository that calls it.
+#
+# This is a placeholder gate, deliberately, exactly like the organisation's: it reports the
+# check `ci / ci` - which is the name branch protection requires - and runs nothing of its
+# own. Move your real checks here when you know what they are.
+name: ci
+
+on: workflow_call
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder gate
+        run: echo "shared CI ran for ${GITHUB_REPOSITORY}@${GITHUB_SHA}"
